@@ -1,5 +1,11 @@
 package edu.westga.cs.schoolgrades.model;
 
+/**
+ * The SimpleGrade represents an atomic grade
+ * 
+ * @author 	Leslie Keller
+ * @version	13Oct2023
+ */
 public class SimpleGrade implements Grade{
 	
 	private double value;
@@ -16,7 +22,11 @@ public class SimpleGrade implements Grade{
 		}
 		this.value = value;
 	}
-
+	
+	/**
+	 * This method returns the value of the simplegrade object.
+	 * @return	value	the value of the grade
+	 */
 	@Override
 	public double getValue() {
 		return this.value;
