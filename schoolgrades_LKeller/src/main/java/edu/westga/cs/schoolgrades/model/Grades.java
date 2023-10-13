@@ -11,13 +11,21 @@ import java.util.ArrayList;
 public class Grades implements Grade{
 	double value;
 	ArrayList<Grade> grades;
+	Strategy strategy;
+	String strategyChoice;
 	
 	/**
 	 * The Grades constructor initializes the arraylist that will hold the grade objects.
 	 */
-	public Grades() {
+	public Grades(String strategyChoice) {
 		grades = new ArrayList<Grade>();
 		value = 0;
+		if (strategyChoice.equals("Average")) {
+			this.strategy = new StrategyAverageGrades();
+		} else if (strategyChoice.equals("Sum")) {
+			this.strategy = new StrategySumGrades();
+		}
+		
 	}
 	
 	/**
@@ -43,9 +51,8 @@ public class Grades implements Grade{
 	 */
 	@Override
 	public double getValue() {
-		
-		// Implementation?
-		return 0;
+		this.value = strategy.calcuateGrade(grades);		
+		return value;
 	}
 	
 
