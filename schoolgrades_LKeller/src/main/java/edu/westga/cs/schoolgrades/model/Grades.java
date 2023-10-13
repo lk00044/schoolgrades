@@ -43,11 +43,9 @@ public class Grades implements Grade{
 	 */
 	@Override
 	public double getValue() {
-		double sum = 0;
-		for (Grade grade : this.grades){
-			sum += grade.getValue();
-		}
-		return sum;
+		
+		// Implementation?
+		return 0;
 	}
 	
 
