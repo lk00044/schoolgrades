@@ -35,9 +35,9 @@ public class WeightedGrade implements Grade{
 	 */
 	@Override
 	public double getValue() {
-		//return this.value * this.weight;
-		Grade wtdGrade = new WeightDecorator(this);
-		return wtdGrade.getValue();
+		return this.value * this.weight;
+	//	Grade wtdGrade = new WeightDecorator(this);
+	//	return wtdGrade.getValue();
 		
 	}
 
