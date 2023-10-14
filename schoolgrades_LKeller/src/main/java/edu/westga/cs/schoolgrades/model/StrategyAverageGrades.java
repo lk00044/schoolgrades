@@ -3,7 +3,7 @@ package edu.westga.cs.schoolgrades.model;
 import java.util.ArrayList;
 
 /**
- * This class calcuates the average of the Grades
+ * This class handles the strategy that calculates the average of the Grades
  * 
  * @author 	Leslie Keller
  * @version	13Oct2023

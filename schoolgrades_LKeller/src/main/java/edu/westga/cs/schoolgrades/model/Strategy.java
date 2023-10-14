@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * This is the interface for the Strategy classes
  * 
- * @author 	Leslie Kellre
+ * @author 	Leslie Keller
  * @version	13Oct2023
  */
 public interface Strategy {

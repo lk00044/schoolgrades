@@ -3,7 +3,7 @@ package edu.westga.cs.schoolgrades.model;
 import java.util.ArrayList;
 
 /**
- * This class takes the grades and calcuate the sum
+ * This class handles the strategy that takes the grades and calculate the sum
  * 
  * @author 	Leslie Keller
  * @verion	13Oct2023

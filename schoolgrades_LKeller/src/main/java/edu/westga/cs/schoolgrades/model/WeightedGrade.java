@@ -9,18 +9,24 @@ package edu.westga.cs.schoolgrades.model;
 public class WeightedGrade implements Grade{
 	
 	private double value;
+	private double weight;
 	
 	/**
 	 * Constructor to create the WeightedGrade object
 	 * @param: 			value	The value of the grade
 	 * Precondition: 	value cannot be negative. 
 	 */
-	public WeightedGrade(double value) {
+	public WeightedGrade(double value, double weight) {
 		if (value < 0)
 		{
 			throw new IllegalArgumentException("Grade cannot be negative.");
 		}
+		if (weight < 0)
+		{
+			throw new IllegalArgumentException("Grade weight cannot be negative.");
+		}
 		this.value = value;
+		this.weight = weight;
 	}
 
 	/**
@@ -29,7 +35,7 @@ public class WeightedGrade implements Grade{
 	 */
 	@Override
 	public double getValue() {
-		return this.value;
+		return this.value * this.weight;
 	}
 
 }
