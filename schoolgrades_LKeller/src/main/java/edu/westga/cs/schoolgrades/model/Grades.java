@@ -41,6 +41,9 @@ public class Grades implements Grade{
 	 * @param	grade	the Grade object to be added
 	 */
 	public void addGrade(Grade aGrade) {
+		if (aGrade == null) {
+			throw new IllegalArgumentException("Cannot add null grade.");
+		}
 		this.grades.add(aGrade);
 	}
 	
