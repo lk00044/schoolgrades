@@ -54,7 +54,7 @@ public class Grades implements Grade{
 	 */
 	@Override
 	public double getValue() {
-		this.value = strategy.calcuateGrade(grades);		
+		this.value = strategy.calculateGrade(grades);		
 		return value;
 	}
 	

@@ -16,7 +16,7 @@ public class StrategySumGrades implements Strategy{
 	 * @return sum	the sum of all the Grade values
 	 */
 	@Override
-	public double calcuateGrade(ArrayList<Grade> grades) {
+	public double calculateGrade(ArrayList<Grade> grades) {
 		if (grades == null) {
 			throw new IllegalArgumentException("There are no grades to calculate.");
 		}

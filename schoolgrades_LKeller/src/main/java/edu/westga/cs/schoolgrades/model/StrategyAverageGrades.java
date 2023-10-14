@@ -16,7 +16,7 @@ public class StrategyAverageGrades implements Strategy{
 	 * @return average	the sum of all the Grade values divided by the number of Grades in the arraylist
 	 */
 	@Override
-	public double calcuateGrade(ArrayList<Grade> grades) {
+	public double calculateGrade(ArrayList<Grade> grades) {
 		if (grades == null) {
 			throw new IllegalArgumentException("There are no grades to calculate.");
 		}

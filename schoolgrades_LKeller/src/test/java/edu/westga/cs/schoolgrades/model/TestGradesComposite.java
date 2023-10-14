@@ -65,8 +65,16 @@ class TestGradesComposite {
 		grades.addGrade(new SimpleGrade(90));
 		grades.addGrade(new SimpleGrade(70));
 		grades.addGrade(new SimpleGrade(80));
-		assertEquals(240, grades.getValue(), .0001);
+		assertEquals(240, grades.getValue(), .0001);		
 	}
-
+	
+	@Test
+	void testAdding3GradesToGradesArrayListSizeWithGetGradesWithSum() {
+		Grades grades = new Grades("Sum");
+		grades.addGrade(new SimpleGrade(90));
+		grades.addGrade(new SimpleGrade(70));
+		grades.addGrade(new SimpleGrade(80));
+		assertEquals(3, grades.getGrades().size());		
+	}
 
 }

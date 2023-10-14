@@ -10,6 +10,6 @@ import java.util.ArrayList;
  */
 public interface Strategy {
 	
-	public double calcuateGrade(ArrayList<Grade> grades);
+	public double calculateGrade(ArrayList<Grade> grades);
 
 }
