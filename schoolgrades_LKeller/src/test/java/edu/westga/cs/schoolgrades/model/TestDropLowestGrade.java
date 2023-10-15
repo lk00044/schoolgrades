@@ -20,7 +20,7 @@ class TestDropLowestGrade {
 	@Test
 	void testCalculateGradesWithSum() {
 		Strategy strategy = new StrategySumGrades();
-		Grades grades = new Grades("Average");
+		Grades grades = new Grades("Sum");
 		grades.addGrade(new SimpleGrade(90));
 		grades.addGrade(new SimpleGrade(70));
 		grades.addGrade(new SimpleGrade(80));
