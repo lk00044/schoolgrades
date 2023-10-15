@@ -18,7 +18,7 @@ public class StrategyDropLowest implements Strategy{
 
 	@Override
 	public double calculateGrade(ArrayList<Grade> grades) {
-		double lowestValue = -100;
+		double lowestValue = Integer.MAX_VALUE;
 		int lowestIndex = 0;
 		for(int index = 0; index < grades.size(); index++) {
 			if (grades.get(index).getValue() < lowestValue) {
@@ -28,7 +28,7 @@ public class StrategyDropLowest implements Strategy{
 		}
 		grades.remove(lowestIndex);
 		
-		double sum = 0;
+		double sum = 0;;
 		for(Grade grade : grades) {
 			sum += grade.getValue();
 		}
