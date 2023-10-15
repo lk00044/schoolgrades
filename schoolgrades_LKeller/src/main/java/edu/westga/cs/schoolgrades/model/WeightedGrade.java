@@ -19,8 +19,8 @@ public class WeightedGrade implements Grade{
 	 * @precondition	weight >= 0
 	 */
 	public WeightedGrade(Grade grade, double weight) {
-		if (grade.getValue() < 0) {
-			throw new IllegalArgumentException("Negative grades not allowed.");
+		if (grade == null) {
+			throw new IllegalArgumentException("A grade is required.");
 			
 		}
 		if (weight < 0) {
