@@ -40,6 +40,7 @@ class TestGradesComposite {
 	void testAddingGradeToGradesArrayListWithAverage() {
 		Grades grades = new Grades("Average");
 		grades.addGrade(new SimpleGrade(90));
+		grades.addGrade(new WeightedGrade(new SimpleGrade(90), 1.0));
 		assertEquals(90, grades.getValue(), .0001);
 	}
 	
@@ -47,16 +48,18 @@ class TestGradesComposite {
 	void testAddingGradeToGradesArrayListWithSum() {
 		Grades grades = new Grades("Sum");
 		grades.addGrade(new SimpleGrade(90));
-		assertEquals(90, grades.getValue(), .0001);
+		grades.addGrade(new WeightedGrade(new SimpleGrade(90), 1.0));
+		assertEquals(180, grades.getValue(), .0001);
 	}
 	
 	@Test
 	void testAdding3GradesToGradesArrayListWithGetValueWithAverage() {
 		Grades grades = new Grades("Average");
 		grades.addGrade(new SimpleGrade(90));
-		grades.addGrade(new SimpleGrade(70));
 		grades.addGrade(new SimpleGrade(80));
-		assertEquals(80, grades.getValue(), .0001);
+		grades.addGrade(new WeightedGrade(new SimpleGrade(80), 1.0));
+		grades.addGrade(new WeightedGrade(new SimpleGrade(90), 1.0));
+		assertEquals(85, grades.getValue(), .0001);
 	}
 	
 	@Test
