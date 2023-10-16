@@ -18,6 +18,9 @@ public class Grades implements Grade{
 	 * The Grades constructor initializes the arraylist that will hold the grade objects.
 	 */
 	public Grades(String strategyChoice) {
+		if (strategyChoice == null) {
+			throw new IllegalArgumentException("Strategy choice missing.");
+		}
 		grades = new ArrayList<Grade>();
 		value = 0;
 		if (strategyChoice.equals("Average")) {

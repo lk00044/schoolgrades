@@ -16,7 +16,7 @@ public class SimpleGrade implements Grade{
 	 * Precondition: 	value cannot be negative. 
 	 */
 	public SimpleGrade(double value) {
-		if (value < 0)
+		if (value < 0.0)
 		{
 			throw new IllegalArgumentException("Grade cannot be negative.");
 		}
