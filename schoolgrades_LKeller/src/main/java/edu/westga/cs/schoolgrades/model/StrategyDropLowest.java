@@ -26,18 +26,8 @@ public class StrategyDropLowest implements Strategy{
 				lowestIndex = index;
 			}
 		}
-		grades.remove(lowestIndex);
-		
-		double sum = 0;;
-		for(Grade grade : grades) {
-			sum += grade.getValue();
-		}
-		
-		if(this.strategy.getClass().getSimpleName().equals("StrategyAverageGrades")) {
-			return sum/grades.size();	
-		} else {
-			return sum;
-		}
+		grades.remove(lowestIndex);		
+		return this.strategy.calculateGrade(grades);
 		
 	}
 	
