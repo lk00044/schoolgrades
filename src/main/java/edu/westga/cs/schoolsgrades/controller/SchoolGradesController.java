@@ -2,12 +2,16 @@ package edu.westga.cs.schoolsgrades.controller;
 
 import edu.westga.cs.schoolgrades.model.Grade;
 import edu.westga.cs.schoolgrades.model.GradeCalculationStrategy;
+import edu.westga.cs.schoolgrades.model.SimpleGrade;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.util.converter.NumberStringConverter;
 
 public class SchoolGradesController {
@@ -19,7 +23,9 @@ public class SchoolGradesController {
     @FXML private ListView <Grade> lstQuizGrades;
     @FXML private ListView <Grade> lstHWGrades;
     @FXML private ListView <Grade> lstExamGrades;
-    
+    @FXML private TextInputDialog td;    
+    private IntegerProperty grade = new SimpleIntegerProperty(0);
+
     public static final ObservableList<Grade> quizGrades = FXCollections.observableArrayList();    
     public static final ObservableList<Grade> hwGrades = FXCollections.observableArrayList();    
     public static final ObservableList<Grade> examGrades =  FXCollections.observableArrayList();
@@ -31,8 +37,9 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
-
-    	// this.txtScore.textProperty().bindBidirectional(this.score, new NumberStringConverter());  	
+    	 td = new TextInputDialog("Enter the grade"); 
+         td.setHeaderText("School Grades"); 
+    	 this.td.contentTextProperty().bindBidirectional(this.grade, new NumberStringConverter());  	
     }
     
     
@@ -52,7 +59,8 @@ public class SchoolGradesController {
      * @postcondition: Quiz grade is added and the subtotal is updated.
      */
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
-        
+
+    	SchoolGradesController.quizGrades.add(new SimpleGrade(Double.parseDouble(grade)));
     }   
     
     /**
@@ -73,6 +81,16 @@ public class SchoolGradesController {
     @FXML protected void handleMenuItemAddExamAction(ActionEvent event) {
         
     }   
+    
+    private Grade getGrade() {
+    	this.td.showAndWait();
+    	this.td.setContentText("Grade: ");
+    	String inputGrade = this.td.getEditor().getText();
+    	int gradeToAdd = Integer.parseInt(inputGrade); 
+    	
+    	
+    	return null;
+    }
     
     
 }
