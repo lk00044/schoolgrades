@@ -23,7 +23,8 @@ public class SchoolGradesController {
     @FXML private ListView <Grade> lstQuizGrades;
     @FXML private ListView <Grade> lstHWGrades;
     @FXML private ListView <Grade> lstExamGrades;
-    @FXML private TextInputDialog td;    
+    @FXML private TextInputDialog td;   
+    
     private IntegerProperty grade = new SimpleIntegerProperty(0);
 
     public static final ObservableList<Grade> quizGrades = FXCollections.observableArrayList();    
@@ -37,9 +38,7 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
-    	 td = new TextInputDialog("Enter the grade"); 
-         td.setHeaderText("School Grades"); 
-    	 this.td.contentTextProperty().bindBidirectional(this.grade, new NumberStringConverter());  	
+    	 	
     }
     
     
@@ -60,7 +59,7 @@ public class SchoolGradesController {
      */
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
 
-    	SchoolGradesController.quizGrades.add(new SimpleGrade(Double.parseDouble(grade)));
+    	
     }   
     
     /**
@@ -83,9 +82,13 @@ public class SchoolGradesController {
     }   
     
     private Grade getGrade() {
+    	this.td = new TextInputDialog("Enter the grade"); 
+        this.td.setHeaderText("School Grades");  
     	this.td.showAndWait();
     	this.td.setContentText("Grade: ");
     	String inputGrade = this.td.getEditor().getText();
+    	this.td.
+   	 	this.td.contentTextProperty().bindBidirectional(this.grade, new NumberStringConverter()); 
     	int gradeToAdd = Integer.parseInt(inputGrade); 
     	
     	
