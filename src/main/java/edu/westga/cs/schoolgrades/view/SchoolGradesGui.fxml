@@ -1,8 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="436.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <HBox prefHeight="40.0" prefWidth="436.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="139.0" text="Final Grade: ">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Label>
+            <TextField prefHeight="25.0" prefWidth="116.0">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </TextField>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Recalculate">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+   <left>
+      <VBox prefHeight="296.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Quizzes">
+               <VBox.margin>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </VBox.margin>
+            </Label>
+            <ListView prefHeight="126.0" prefWidth="120.0">
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="10.0" top="10.0" />
+               </padding>
+            </ListView>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Quiz SubTotal" />
+            <TextField />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </left>
+   <right>
+      <VBox prefHeight="207.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Exams" />
+            <ListView prefHeight="198.0" prefWidth="120.0" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Exam SubTotal" />
+            <TextField />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+         </padding>
+      </VBox>
+   </right>
+   <center>
+      <VBox prefHeight="171.0" prefWidth="157.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Homeworks" />
+            <ListView prefHeight="133.0" prefWidth="120.0" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Homework SubTotal" />
+            <TextField />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </center>
+   <top>
+      <MenuButton accessibleText="Data Menu" mnemonicParsing="false" prefHeight="20.0" prefWidth="87.0" text="Data" BorderPane.alignment="CENTER_LEFT">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Add Quiz" />
+          <MenuItem mnemonicParsing="false" text="Add Homework" />
+            <MenuItem mnemonicParsing="false" text="Add Exam" />
+        </items>
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </MenuButton>
+   </top>
+</BorderPane>
