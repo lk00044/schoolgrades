@@ -16,17 +16,20 @@ import javafx.stage.Stage;
  * @version Fall 2023
  */
 
-//private static final String GUI_RESOURCE = "edu/westga/cs/babble/views/SchoolGradesGui.fxml";
-
 public class schoolgrades extends Application  {
+	
+	private static final String GUI_RESOURCE = "edu/westga/cs/schoolgrades/view/SchoolGradesGui.fxml";
+	
+	public void start(Stage primaryStage) throws Exception {
 	  ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-      URL resource = classLoader.getResource(SchoolGrades.GUI_RESOURCE);
+      URL resource = classLoader.getResource(schoolgrades.GUI_RESOURCE);
       FXMLLoader loader = new FXMLLoader(resource);
       Parent root = (Parent) loader.load();
       Scene scene = new Scene(root);
       primaryStage.setScene(scene);
       primaryStage.setTitle("School Grades");
       primaryStage.show();
+	}
   }
 
   /**
@@ -38,8 +41,3 @@ public class schoolgrades extends Application  {
       launch(args);
   }
 
-@Override
-public void start(Stage arg0) throws Exception {
-	// TODO Auto-generated method stub
-	
-}
