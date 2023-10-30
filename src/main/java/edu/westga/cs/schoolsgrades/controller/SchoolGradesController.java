@@ -37,11 +37,40 @@ public class SchoolGradesController {
     
     
     /**
-     * Method to reset the "Your word" area by moving tiles back to the tile rack.
+     * Method to 
      * @precondition: none
-     * @postcondition: Tiles are moved to the player's tile rack
+     * @postcondition: 
      */
-    @FXML protected void handleResetButtonAction(ActionEvent event) {
+    @FXML protected void handleRecalcuateButtonAction(ActionEvent event) {
+        
+    }   
+    
+    
+    /**
+     * Method to add a quiz grade and update the subtotal
+     * @precondition: none
+     * @postcondition: Quiz grade is added and the subtotal is updated.
+     */
+    @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
+        
+    }   
+    
+    /**
+     * Method to add a homework grade and update the average
+     * Note: Average after dropping lowest grade.
+     * @precondition: none
+     * @postcondition: Homework grade is added and the average is updated.
+     */
+    @FXML protected void handleMenuItemAddHomeworkAction(ActionEvent event) {
+        
+    }   
+    
+    /**
+     * Method to add an exam grade and update the average
+     * @precondition: none
+     * @postcondition: Exam grade is added and the average is updated.
+     */
+    @FXML protected void handleMenuItemAddExamAction(ActionEvent event) {
         
     }   
     

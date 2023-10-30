@@ -2,7 +2,6 @@ package edu.westga.cs.schoolgrades;
 
 import java.net.URL;
 
-import edu.westga.cs.babble.Babble;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,7 +29,7 @@ public class schoolgrades extends Application  {
       primaryStage.setTitle("School Grades");
       primaryStage.show();
 	}
-  }
+ 
 
   /**
    * Start point for the application.
@@ -41,3 +40,4 @@ public class schoolgrades extends Application  {
       launch(args);
   }
 
+}
