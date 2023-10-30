@@ -1,6 +1,7 @@
 package edu.westga.cs.schoolsgrades.controller;
 
 import edu.westga.cs.schoolgrades.model.Grade;
+import edu.westga.cs.schoolgrades.model.GradeCalculationStrategy;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +30,6 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
-    	
 
     	// this.txtScore.textProperty().bindBidirectional(this.score, new NumberStringConverter());  	
     }
