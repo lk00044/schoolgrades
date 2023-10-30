@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="436.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <HBox prefHeight="40.0" prefWidth="436.0" BorderPane.alignment="CENTER">
@@ -60,7 +59,7 @@
          <children>
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Exams" />
             <ListView prefHeight="198.0" prefWidth="120.0" />
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Exam SubTotal" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Exam Average" />
             <TextField />
          </children>
          <padding>
@@ -73,7 +72,7 @@
          <children>
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Homeworks" />
             <ListView prefHeight="133.0" prefWidth="120.0" />
-            <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Homework SubTotal" />
+            <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Homework Average" />
             <TextField />
          </children>
          <padding>
