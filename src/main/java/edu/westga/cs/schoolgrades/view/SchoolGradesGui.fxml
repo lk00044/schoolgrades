@@ -25,7 +25,7 @@
                   <Insets left="20.0" />
                </padding>
             </TextField>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Recalculate">
+            <Button mnemonicParsing="false" onAction="#handleRecalculateButtonAction" prefHeight="25.0" prefWidth="121.0" text="Recalculate">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
@@ -83,9 +83,9 @@
    <top>
       <MenuButton accessibleText="Data Menu" mnemonicParsing="false" prefHeight="20.0" prefWidth="87.0" text="Data" BorderPane.alignment="CENTER_LEFT">
         <items>
-          <MenuItem mnemonicParsing="false" text="Add Quiz" />
-          <MenuItem mnemonicParsing="false" text="Add Homework" />
-            <MenuItem mnemonicParsing="false" text="Add Exam" />
+          <MenuItem mnemonicParsing="false" onAction="#handleMenuItemAddQuizAction" text="Add Quiz" />
+          <MenuItem mnemonicParsing="false" onAction="#handleMenuItemAddHomeworkAction" text="Add Homework" />
+            <MenuItem mnemonicParsing="false" onAction="#handleMenuItemAddExamAction" text="Add Exam" />
         </items>
          <padding>
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
