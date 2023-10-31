@@ -11,16 +11,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="436.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="281.0" prefWidth="436.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs.schoolsgrades.controller.SchoolGradesController">
    <bottom>
       <HBox prefHeight="40.0" prefWidth="436.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="120.0" text="Final Grade: ">
+            <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="139.0" text="Final Grade: ">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="120.0">
+            <TextField prefHeight="25.0" prefWidth="118.0">
                <padding>
                   <Insets left="20.0" />
                </padding>

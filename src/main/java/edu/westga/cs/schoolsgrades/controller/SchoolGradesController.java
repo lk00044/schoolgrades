@@ -36,8 +36,7 @@ public class SchoolGradesController {
     public static final ObservableList<Grade> hwGrades = FXCollections.observableArrayList();    
     public static final ObservableList<Grade> examGrades =  FXCollections.observableArrayList();
     
-    private GradeCalculationStrategy strategy;
-    private DropLowestStrategy strategyDrop;
+    private DropLowestStrategy strategyDropAvg;
     private AverageOfGradesStrategy strategyAvg;
     private SumOfGradesStrategy strategySum;
     
@@ -49,9 +48,9 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
-    	strategyDrop = new DropLowestStrategy(strategy);
     	strategyAvg = new AverageOfGradesStrategy();
     	strategySum = new SumOfGradesStrategy();
+    	strategyDropAvg = new DropLowestStrategy(strategyAvg);  	
     	 	
     }
     
@@ -61,7 +60,7 @@ public class SchoolGradesController {
      * @precondition: none
      * @postcondition: 
      */
-    @FXML protected void handleRecalcuateButtonAction(ActionEvent event) {
+    @FXML protected void handleRecalculateButtonAction(ActionEvent event) {
         
     }   
     
@@ -101,17 +100,10 @@ public class SchoolGradesController {
         
     }   
     
-    private Grade getGrade() {    	
-    	this.td = new TextInputDialog("Enter the grade"); 
-        this.td.setHeaderText("School Grades");  
-    	this.td.showAndWait();
-    	this.td.setContentText("Grade: ");
-    	String inputGrade = this.td.getEditor().getText();
-    	double gradeInput = Double.parseDouble(inputGrade); 
+    private Grade getGrade() {  
     	
-    	Grade gradeToAdd = new SimpleGrade(gradeInput);
-    	
-    	return gradeToAdd;
+    	return null;
+
     }
     
     
