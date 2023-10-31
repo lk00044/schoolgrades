@@ -15,17 +15,17 @@
    <bottom>
       <HBox prefHeight="40.0" prefWidth="436.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="139.0" text="Final Grade: ">
+            <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="120.0" text="Final Grade: ">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="116.0">
+            <TextField prefHeight="25.0" prefWidth="120.0">
                <padding>
                   <Insets left="20.0" />
                </padding>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#handleRecalculateButtonAction" prefHeight="25.0" prefWidth="121.0" text="Recalculate">
+            <Button mnemonicParsing="false" onAction="#handleRecalculateButtonAction" prefHeight="25.0" prefWidth="120.0" text="Recalculate">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>

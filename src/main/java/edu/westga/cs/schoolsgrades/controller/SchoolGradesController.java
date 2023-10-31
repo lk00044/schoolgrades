@@ -1,8 +1,11 @@
 package edu.westga.cs.schoolsgrades.controller;
 
+import edu.westga.cs.schoolgrades.model.AverageOfGradesStrategy;
+import edu.westga.cs.schoolgrades.model.DropLowestStrategy;
 import edu.westga.cs.schoolgrades.model.Grade;
 import edu.westga.cs.schoolgrades.model.GradeCalculationStrategy;
 import edu.westga.cs.schoolgrades.model.SimpleGrade;
+import edu.westga.cs.schoolgrades.model.SumOfGradesStrategy;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -33,6 +36,12 @@ public class SchoolGradesController {
     public static final ObservableList<Grade> hwGrades = FXCollections.observableArrayList();    
     public static final ObservableList<Grade> examGrades =  FXCollections.observableArrayList();
     
+    private GradeCalculationStrategy strategy;
+    private DropLowestStrategy strategyDrop;
+    private AverageOfGradesStrategy strategyAvg;
+    private SumOfGradesStrategy strategySum;
+    
+    
     /**
      * initialize the game
      * @precondition: none
@@ -40,6 +49,9 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
+    	strategyDrop = new DropLowestStrategy(strategy);
+    	strategyAvg = new AverageOfGradesStrategy();
+    	strategySum = new SumOfGradesStrategy();
     	 	
     }
     
