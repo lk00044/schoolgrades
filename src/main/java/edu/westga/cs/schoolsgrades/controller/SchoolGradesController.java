@@ -58,7 +58,8 @@ public class SchoolGradesController {
      * @postcondition: Quiz grade is added and the subtotal is updated.
      */
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
-
+    	Grade newGrade = this.getGrade();
+    	
     	
     }   
     
@@ -81,18 +82,17 @@ public class SchoolGradesController {
         
     }   
     
-    private Grade getGrade() {
+    private Grade getGrade() {    	
     	this.td = new TextInputDialog("Enter the grade"); 
         this.td.setHeaderText("School Grades");  
     	this.td.showAndWait();
     	this.td.setContentText("Grade: ");
     	String inputGrade = this.td.getEditor().getText();
-    	this.td.
-   	 	this.td.contentTextProperty().bindBidirectional(this.grade, new NumberStringConverter()); 
-    	int gradeToAdd = Integer.parseInt(inputGrade); 
+    	double gradeInput = Double.parseDouble(inputGrade); 
     	
+    	Grade gradeToAdd = new SimpleGrade(gradeInput);
     	
-    	return null;
+    	return gradeToAdd;
     }
     
     
