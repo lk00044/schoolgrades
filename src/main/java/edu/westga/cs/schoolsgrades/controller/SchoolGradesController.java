@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.cell.ComboBoxListCell;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.converter.NumberStringConverter;
 
 public class SchoolGradesController {
@@ -58,9 +60,14 @@ public class SchoolGradesController {
      * @postcondition: Quiz grade is added and the subtotal is updated.
      */
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
+    	this.lstQuizGrades.setEditable(true);
     	Grade newGrade = this.getGrade();
-    	
-    	
+    	this.quizGrades.add(newGrade);
+    	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades);
+
+    //	this.lstQuizGrades.setCellFactory(TextFieldListCell.forListView(this.quizGrades));
+		this.lstQuizGrades.accessibleTextProperty();
+		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());
     }   
     
     /**
