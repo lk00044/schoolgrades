@@ -52,8 +52,7 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
-    	 converter = new NumberStringConverter();
-    	
+    	  	
     	strategyAvg = new AverageOfGradesStrategy();
     	strategySum = new SumOfGradesStrategy();
     	strategyDropAvg = new DropLowestStrategy(strategyAvg);  	
@@ -78,13 +77,15 @@ public class SchoolGradesController {
      */
     
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
-    	Grade newGrade = new SimpleGrade(0.00);
+    	SimpleGrade newGrade = new SimpleGrade(0.00);
     	SchoolGradesController.quizGrades.add(newGrade.getValue());
-    	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades);
-    	this.lstQuizGrades.setEditable(true);  
+    	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades); 
     	this.lstQuizGrades.setCellFactory(ChoiceBoxListCell.forListView(newGrade.getValue()));
 		this.lstQuizGrades.accessibleTextProperty();
+		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());
+		this.lstQuizGrades.setEditable(true); 
     }   
+    
     
     /**
      * Method to add a homework grade and update the average
