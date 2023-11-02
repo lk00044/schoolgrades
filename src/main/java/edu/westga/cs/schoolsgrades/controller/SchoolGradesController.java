@@ -1,5 +1,7 @@
 package edu.westga.cs.schoolsgrades.controller;
 
+import edu.westga.cs.babble.controllers.BabbleController;
+import edu.westga.cs.babble.model.Tile;
 import edu.westga.cs.schoolgrades.model.AverageOfGradesStrategy;
 import edu.westga.cs.schoolgrades.model.DropLowestStrategy;
 import edu.westga.cs.schoolgrades.model.Grade;
@@ -15,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.cell.ChoiceBoxListCell;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.converter.NumberStringConverter;
@@ -25,16 +28,17 @@ public class SchoolGradesController {
 	@FXML private TextField txtSubTotHW;
 	@FXML private TextField txtSubTotExam;
 	@FXML private TextField txtFinalGrade;
-    @FXML private ListView <Grade> lstQuizGrades;
-    @FXML private ListView <Grade> lstHWGrades;
-    @FXML private ListView <Grade> lstExamGrades;
-    @FXML private TextInputDialog td;   
+    @FXML private ListView <Double> lstQuizGrades;
+    @FXML private ListView <Double> lstHWGrades;
+    @FXML private ListView <Double> lstExamGrades;
     
     private IntegerProperty grade = new SimpleIntegerProperty(0);
+    
+    NumberStringConverter converter;
 
-    public static final ObservableList<Grade> quizGrades = FXCollections.observableArrayList();    
-    public static final ObservableList<Grade> hwGrades = FXCollections.observableArrayList();    
-    public static final ObservableList<Grade> examGrades =  FXCollections.observableArrayList();
+    public static final ObservableList<Double> quizGrades = FXCollections.observableArrayList();    
+    public static final ObservableList<Double> hwGrades = FXCollections.observableArrayList();    
+    public static final ObservableList<Double> examGrades =  FXCollections.observableArrayList();
     
     private DropLowestStrategy strategyDropAvg;
     private AverageOfGradesStrategy strategyAvg;
@@ -48,6 +52,8 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
+    	 converter = new NumberStringConverter();
+    	
     	strategyAvg = new AverageOfGradesStrategy();
     	strategySum = new SumOfGradesStrategy();
     	strategyDropAvg = new DropLowestStrategy(strategyAvg);  	
@@ -70,15 +76,14 @@ public class SchoolGradesController {
      * @precondition: none
      * @postcondition: Quiz grade is added and the subtotal is updated.
      */
+    
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
-    	this.lstQuizGrades.setEditable(true);
-    	Grade newGrade = this.getGrade();
-    	this.quizGrades.add(newGrade);
+    	Grade newGrade = new SimpleGrade(0.00);
+    	SchoolGradesController.quizGrades.add(newGrade.getValue());
     	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades);
-
-    //	this.lstQuizGrades.setCellFactory(TextFieldListCell.forListView(this.quizGrades));
+    	this.lstQuizGrades.setEditable(true);  
+    	this.lstQuizGrades.setCellFactory(ChoiceBoxListCell.forListView(newGrade.getValue()));
 		this.lstQuizGrades.accessibleTextProperty();
-		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());
     }   
     
     /**
