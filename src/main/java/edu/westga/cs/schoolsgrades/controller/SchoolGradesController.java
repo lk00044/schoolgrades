@@ -23,6 +23,7 @@ import javafx.scene.control.cell.ChoiceBoxListCell;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.Callback;
+import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.NumberStringConverter;
 
 public class SchoolGradesController {
@@ -31,18 +32,18 @@ public class SchoolGradesController {
 	@FXML private TextField txtSubTotHW;
 	@FXML private TextField txtSubTotExam;
 	@FXML private TextField txtFinalGrade;
-    @FXML private ListView <Number> lstQuizGrades;
-    @FXML private ListView <Number> lstHWGrades;
-    @FXML private ListView <Number> lstExamGrades;
+    @FXML private ListView <Double> lstQuizGrades;
+    @FXML private ListView <Double> lstHWGrades;
+    @FXML private ListView <Double> lstExamGrades;
   
     
     private IntegerProperty grade = new SimpleIntegerProperty(0);
     
-    NumberStringConverter converter;
+    DoubleStringConverter converter;
 
-    public static final ObservableList<Number> quizGrades = FXCollections.observableArrayList();    
-    public static final ObservableList<Number> hwGrades = FXCollections.observableArrayList();    
-    public static final ObservableList<Number> examGrades =  FXCollections.observableArrayList();
+    public static final ObservableList<Double> quizGrades = FXCollections.observableArrayList();    
+    public static final ObservableList<Double> hwGrades = FXCollections.observableArrayList();    
+    public static final ObservableList<Double> examGrades =  FXCollections.observableArrayList();
     
     private DropLowestStrategy strategyDropAvg;
     private AverageOfGradesStrategy strategyAvg;
@@ -59,7 +60,7 @@ public class SchoolGradesController {
     	this.lstQuizGrades = new ListView();
     	this.lstExamGrades = new ListView();
     	this.lstHWGrades = new ListView();
-    	converter = new NumberStringConverter();
+    	converter = new DoubleStringConverter();
     	strategyAvg = new AverageOfGradesStrategy();
     	strategySum = new SumOfGradesStrategy();
     	strategyDropAvg = new DropLowestStrategy(strategyAvg);  
