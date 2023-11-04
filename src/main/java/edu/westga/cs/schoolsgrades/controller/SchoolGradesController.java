@@ -51,7 +51,7 @@ public class SchoolGradesController {
     
     
     /**
-     * initialize the game
+     * initialize the listviews, strategies, and converter
      * @precondition: none
      * @postcondition: 	School Grades is initialized
      */
@@ -65,11 +65,13 @@ public class SchoolGradesController {
     	strategySum = new SumOfGradesStrategy();
     	strategyDropAvg = new DropLowestStrategy(strategyAvg);  
     	this.lstQuizGrades.setEditable(true); 
+    	this.lstExamGrades.setEditable(true); 
+    	this.lstHWGrades.setEditable(true); 
     }
     
     
     /**
-     * Method to 
+     * Method to recalculate grades
      * @precondition: none
      * @postcondition: 
      */
@@ -91,9 +93,6 @@ public class SchoolGradesController {
     	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades); 
 		this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());
-		
-		
-
     }   
     
     
@@ -115,12 +114,6 @@ public class SchoolGradesController {
     @FXML protected void handleMenuItemAddExamAction(ActionEvent event) {
         
     }   
-    
-    private Grade getGrade() {  
-    	
-    	return null;
-
-    }
-    
+   
     
 }
