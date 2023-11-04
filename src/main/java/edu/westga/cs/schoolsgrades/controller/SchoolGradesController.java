@@ -12,6 +12,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.converter.StringConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -28,17 +29,18 @@ public class SchoolGradesController {
 	@FXML private TextField txtSubTotHW;
 	@FXML private TextField txtSubTotExam;
 	@FXML private TextField txtFinalGrade;
-    @FXML private ListView <Double> lstQuizGrades;
-    @FXML private ListView <Double> lstHWGrades;
-    @FXML private ListView <Double> lstExamGrades;
+    @FXML private ListView <Number> lstQuizGrades;
+    @FXML private ListView <Number> lstHWGrades;
+    @FXML private ListView <Number> lstExamGrades;
+  
     
     private IntegerProperty grade = new SimpleIntegerProperty(0);
     
     NumberStringConverter converter;
 
-    public static final ObservableList<Double> quizGrades = FXCollections.observableArrayList();    
-    public static final ObservableList<Double> hwGrades = FXCollections.observableArrayList();    
-    public static final ObservableList<Double> examGrades =  FXCollections.observableArrayList();
+    public static final ObservableList<Number> quizGrades = FXCollections.observableArrayList();    
+    public static final ObservableList<Number> hwGrades = FXCollections.observableArrayList();    
+    public static final ObservableList<Number> examGrades =  FXCollections.observableArrayList();
     
     private DropLowestStrategy strategyDropAvg;
     private AverageOfGradesStrategy strategyAvg;
@@ -52,10 +54,10 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
-    	  	
+    	converter = new NumberStringConverter();
     	strategyAvg = new AverageOfGradesStrategy();
     	strategySum = new SumOfGradesStrategy();
-    	strategyDropAvg = new DropLowestStrategy(strategyAvg);  	
+    	strategyDropAvg = new DropLowestStrategy(strategyAvg);  
     	 	
     }
     
@@ -78,9 +80,9 @@ public class SchoolGradesController {
     
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
     	SimpleGrade newGrade = new SimpleGrade(0.00);
-    	SchoolGradesController.quizGrades.add(newGrade.getValue());
-    	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades); 
-    	this.lstQuizGrades.setCellFactory(ChoiceBoxListCell.forListView(newGrade.getValue()));
+    	SchoolGradesController.quizGrades.add(newGrade.getValue());    	
+    	this.lstQuizGrades.setCellFactory(TextFieldListCell.forListView(converter));
+    	this.lstQuizGrades.getItems().add((Number) SchoolGradesController.quizGrades); 
 		this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());
 		this.lstQuizGrades.setEditable(true); 
