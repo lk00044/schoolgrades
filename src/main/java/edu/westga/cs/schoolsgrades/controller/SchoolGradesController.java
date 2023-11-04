@@ -1,5 +1,7 @@
 package edu.westga.cs.schoolsgrades.controller;
 
+import javax.swing.event.ChangeListener;
+
 import edu.westga.cs.babble.controllers.BabbleController;
 import edu.westga.cs.babble.model.Tile;
 import edu.westga.cs.schoolgrades.model.AverageOfGradesStrategy;
@@ -94,6 +96,8 @@ public class SchoolGradesController {
     	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades); 
 		this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());	
+		
+		// Add listener for textfield selection to change the grade		
 		
     }   
     
