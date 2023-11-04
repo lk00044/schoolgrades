@@ -57,9 +57,9 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
-    	this.lstQuizGrades = new ListView();
-    	this.lstExamGrades = new ListView();
-    	this.lstHWGrades = new ListView();
+    	this.lstQuizGrades = new ListView<Double>(SchoolGradesController.quizGrades);
+    	this.lstExamGrades = new ListView<Double>(SchoolGradesController.examGrades);
+    	this.lstHWGrades = new ListView<Double>(SchoolGradesController.hwGrades);
     	converter = new DoubleStringConverter();
     	strategyAvg = new AverageOfGradesStrategy();
     	strategySum = new SumOfGradesStrategy();
@@ -87,12 +87,14 @@ public class SchoolGradesController {
      */
     
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
+    	// set up initial value of 0.0
     	SimpleGrade newGrade = new SimpleGrade(0.00);
     	SchoolGradesController.quizGrades.add(newGrade.getValue());   
     	this.lstQuizGrades.setCellFactory(TextFieldListCell.forListView(converter));
     	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades); 
 		this.lstQuizGrades.accessibleTextProperty();
-		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());
+		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());	
+		
     }   
     
     
