@@ -15,12 +15,14 @@ import javafx.collections.ObservableList;
 import javafx.css.converter.StringConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.ChoiceBoxListCell;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.control.cell.TextFieldListCell;
+import javafx.util.Callback;
 import javafx.util.converter.NumberStringConverter;
 
 public class SchoolGradesController {
@@ -54,11 +56,14 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
+    	this.lstQuizGrades = new ListView();
+    	this.lstExamGrades = new ListView();
+    	this.lstHWGrades = new ListView();
     	converter = new NumberStringConverter();
     	strategyAvg = new AverageOfGradesStrategy();
     	strategySum = new SumOfGradesStrategy();
     	strategyDropAvg = new DropLowestStrategy(strategyAvg);  
-    	 	
+    	this.lstQuizGrades.setEditable(true); 
     }
     
     
@@ -80,12 +85,14 @@ public class SchoolGradesController {
     
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
     	SimpleGrade newGrade = new SimpleGrade(0.00);
-    	SchoolGradesController.quizGrades.add(newGrade.getValue());    	
+    	SchoolGradesController.quizGrades.add(newGrade.getValue());   
     	this.lstQuizGrades.setCellFactory(TextFieldListCell.forListView(converter));
-    	this.lstQuizGrades.getItems().add((Number) SchoolGradesController.quizGrades); 
+    	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades); 
 		this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());
-		this.lstQuizGrades.setEditable(true); 
+		
+		
+
     }   
     
     
