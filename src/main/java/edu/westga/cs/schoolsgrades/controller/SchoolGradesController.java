@@ -62,6 +62,7 @@ public class SchoolGradesController {
     	this.lstQuizGrades = new ListView<Double>(SchoolGradesController.quizGrades);
     	this.lstExamGrades = new ListView<Double>(SchoolGradesController.examGrades);
     	this.lstHWGrades = new ListView<Double>(SchoolGradesController.hwGrades);
+    	
     	converter = new DoubleStringConverter();
     	strategyAvg = new AverageOfGradesStrategy();
     	strategySum = new SumOfGradesStrategy();
