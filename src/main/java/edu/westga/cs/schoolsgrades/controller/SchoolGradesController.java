@@ -75,6 +75,12 @@ public class SchoolGradesController {
     private void initialize() {
     	this.lstQuizGrades.setItems(this.quizGrades);
     	this.lstQuizGrades.setCellFactory(new GradeCellFactory());
+    	
+    	this.lstHWGrades.setItems(this.hwGrades);
+    	this.lstHWGrades.setCellFactory(new GradeCellFactory());
+    	
+    	this.lstExamGrades.setItems(this.examGrades);
+    	this.lstExamGrades.setCellFactory(new GradeCellFactory());
  
     	this.gradesQz = new ArrayList<Grade>();
     	this.gradesHW = new ArrayList<Grade>();
@@ -92,9 +98,6 @@ public class SchoolGradesController {
     }
     
     
-
-    
-    
     /**
      * Method to recalculate grades
      * @precondition: none
@@ -102,7 +105,7 @@ public class SchoolGradesController {
      */
     @FXML protected void handleRecalculateButtonAction(ActionEvent event) {
     	 	double quiz = this.qzScore.getValue();
-    	 	double hw = this.hwScore.getValue() / this.lstQuizGrades.getFixedCellSize();
+    	 	double hw = this.hwScore.getValue() / this.quizGrades.size();
     	 	double exam = this.exScore.getValue();
     	 	
     	 	SimpleDoubleProperty grade = new SimpleDoubleProperty(0.0);    	 	
@@ -122,16 +125,14 @@ public class SchoolGradesController {
     	SimpleGrade newGrade = new SimpleGrade(0.00);
     	this.quizGrades.add(newGrade);
     	this.gradesQz.add(newGrade);
-    	this.lstQuizGrades.setItems(this.quizGrades);
-    	
-    	
+    	this.lstQuizGrades.setItems(this.quizGrades); 	
     	
     	
     	// Calc Sum and show in textfield    
     	double calcScore = (this.strategySum.calculate(this.gradesQz));
     	this.qzScore.setValue(calcScore);    	
     	
-  //  	this.txtSubTotQuiz.textProperty().bindBidirectional(this.qzScore, new NumberStringConverter());  
+    	this.txtSubTotQuiz.textProperty().bindBidirectional(this.qzScore, new NumberStringConverter());  
     	
 		this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
