@@ -50,13 +50,7 @@ public class SchoolGradesController {
     private DropLowestStrategy strategyDropAvg;
     private AverageOfGradesStrategy strategyAvg;
     private SumOfGradesStrategy strategySum;
-    
-    private List<Grade> gradesQz;
-    private List<Grade> gradesHW;
-    private List<Grade> gradesEx;
-    
-    
-    // create a custom list cell
+  
     
     
     /**
@@ -74,11 +68,7 @@ public class SchoolGradesController {
     	
     	this.lstExamGrades.setItems(this.examGrades);
     	this.lstExamGrades.setCellFactory(new GradeCellFactory());
- 
-    	this.gradesQz = new ArrayList<Grade>();
-    	this.gradesHW = new ArrayList<Grade>();
-    	this.gradesEx = new ArrayList<Grade>();
-    	
+    
     	converter = new DoubleStringConverter();
     	
     	strategyAvg = new AverageOfGradesStrategy();
@@ -88,6 +78,7 @@ public class SchoolGradesController {
     	this.lstQuizGrades.setEditable(true); 
     	this.lstExamGrades.setEditable(true); 
     	this.lstHWGrades.setEditable(true); 
+
     }
     
     
@@ -117,17 +108,17 @@ public class SchoolGradesController {
     	// set up initial value of 0.0
     	SimpleGrade newGrade = new SimpleGrade(0.00);
     	this.quizGrades.add(newGrade);
-    	this.gradesQz.add(newGrade);
     	this.lstQuizGrades.setItems(this.quizGrades); 	
     	
     	
-    	// Calc Sum and show in textfield    
-    	double calcScore = (this.strategySum.calculate(this.gradesQz));
-    	this.qzScore.setValue(calcScore);    	
+    	// Calculate Sum and show in textfield    
+    	double calcScore = (this.strategySum.calculate(this.quizGrades));
     	
-   // 	this.txtSubTotQuiz.textProperty().bindBidirectional(this.qzScore, new NumberStringConverter());  
     	
-		this.lstQuizGrades.accessibleTextProperty();
+ //		ERROR "this.txtSubTotQuiz" is null   	
+ //   	this.txtSubTotQuiz.setText("" + calcScore);
+
+    	this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
 		
     }   
@@ -170,6 +161,7 @@ public class SchoolGradesController {
                         setText("" + grade.getValue());
                     }
                 }
+
             };
         }
     }
