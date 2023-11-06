@@ -46,7 +46,9 @@ public class SchoolGradesController {
    
     DoubleStringConverter converter;
     
-    private SimpleDoubleProperty score = new SimpleDoubleProperty(0.0)
+    private SimpleDoubleProperty qzScore = new SimpleDoubleProperty(0.0);
+    private SimpleDoubleProperty hwScore = new SimpleDoubleProperty(0.0);
+    private SimpleDoubleProperty exScore = new SimpleDoubleProperty(0.0);
 
     public static final ObservableList<Double> quizGrades = FXCollections.observableArrayList();    
     public static final ObservableList<Double> hwGrades = FXCollections.observableArrayList();    
@@ -72,7 +74,9 @@ public class SchoolGradesController {
     	this.lstExamGrades = new ListView<Double>(SchoolGradesController.examGrades);
     	this.lstHWGrades = new ListView<Double>(SchoolGradesController.hwGrades);
     	
-    	this.grades = new ArrayList<Grade>();
+    	this.gradesQz = new ArrayList<Grade>();
+    	this.gradesHW = new ArrayList<Grade>();
+    	this.gradesEx = new ArrayList<Grade>();
     	
     	converter = new DoubleStringConverter();
     	
@@ -92,8 +96,13 @@ public class SchoolGradesController {
      * @postcondition: Score is displayed in textfield for the final grade.
      */
     @FXML protected void handleRecalculateButtonAction(ActionEvent event) {
+    	 	double quiz = this.qzScore.getValue();
+    	 	double hw = this.hwScore.getValue() / this.lstQuizGrades.getFixedCellSize();
+    	 	double exam = this.exScore.getValue();
     	 	
-    	
+    	 	SimpleDoubleProperty grade = new SimpleDoubleProperty(0.0);    	 	
+    	 	grade.setValue(.2 * quiz + .2 * hw + .4 * exam);    	 	
+    	 	this.txtFinalGrade.textProperty().bindBidirectional(grade, new NumberStringConverter()); 
     }   
     
     
@@ -115,10 +124,8 @@ public class SchoolGradesController {
          
     		public void changed(ObservableValue<? extends Double> observable, Double oldValue, Double newValue) {
             
-        	  int index = this.lstQuizGrades.getSelectionModel().selectedItemIndex();
-        	  
-        	  SchoolGradesController.quizGrades(index).set(newValue);     
-        	  
+        	  int index = this.lstQuizGrades.getSelectionModel().selectedItemIndex();        	  
+        	  SchoolGradesController.quizGrades(index).set(newValue);             	  
         	  this.gradesQz.add(newValue);
         	  
           }
@@ -127,8 +134,8 @@ public class SchoolGradesController {
     	
     	// Calc Sum and show in textfield
     	double calcScore = (this.strategySum.calculate(this.gradesQz));
-    	this.score.setValue(calcScore);    	
-    	this.txtSubTotQuiz.textProperty().bindBidirectional(this.score, new NumberStringConverter());  
+    	this.qzScore.setValue(calcScore);    	
+    	this.txtSubTotQuiz.textProperty().bindBidirectional(this.qzScore, new NumberStringConverter());  
     	
 		this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
