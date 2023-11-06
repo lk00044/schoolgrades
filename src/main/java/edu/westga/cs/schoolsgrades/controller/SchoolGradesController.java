@@ -1,5 +1,8 @@
 package edu.westga.cs.schoolsgrades.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.event.ChangeListener;
 
 import edu.westga.cs.babble.controllers.BabbleController;
@@ -11,6 +14,7 @@ import edu.westga.cs.schoolgrades.model.GradeCalculationStrategy;
 import edu.westga.cs.schoolgrades.model.SimpleGrade;
 import edu.westga.cs.schoolgrades.model.SumOfGradesStrategy;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -41,6 +45,8 @@ public class SchoolGradesController {
     @FXML private ListView <Double> lstExamGrades;
    
     DoubleStringConverter converter;
+    
+    private double score;
 
     public static final ObservableList<Double> quizGrades = FXCollections.observableArrayList();    
     public static final ObservableList<Double> hwGrades = FXCollections.observableArrayList();    
@@ -49,6 +55,8 @@ public class SchoolGradesController {
     private DropLowestStrategy strategyDropAvg;
     private AverageOfGradesStrategy strategyAvg;
     private SumOfGradesStrategy strategySum;
+    
+    private List<Grade> grades;
     
     
     /**
@@ -61,6 +69,8 @@ public class SchoolGradesController {
     	this.lstQuizGrades = new ListView<Double>(SchoolGradesController.quizGrades);
     	this.lstExamGrades = new ListView<Double>(SchoolGradesController.examGrades);
     	this.lstHWGrades = new ListView<Double>(SchoolGradesController.hwGrades);
+    	
+    	this.grades = new ArrayList<Grade>();
     	
     	converter = new DoubleStringConverter();
     	
@@ -80,7 +90,12 @@ public class SchoolGradesController {
      * @postcondition: 
      */
     @FXML protected void handleRecalculateButtonAction(ActionEvent event) {
-        
+    	
+    	this.score = (this.strategyAvg.calculate(this.grades));
+    	
+    	this.txtFinalGrade.textProperty().bindBidirectional(this.score, new NumberStringConverter());
+    	
+    	
     }   
     
     
@@ -104,7 +119,9 @@ public class SchoolGradesController {
             
         	  int index = this.lstQuizGrades.getSelectionModel().selectedItemIndex();
         	  
-        	  SchoolGradesController.quizGrades(index).set(newValue);        	  
+        	  SchoolGradesController.quizGrades(index).set(newValue);     
+        	  
+        	  this.grades.add(newValue);
         	  
           }
         });
