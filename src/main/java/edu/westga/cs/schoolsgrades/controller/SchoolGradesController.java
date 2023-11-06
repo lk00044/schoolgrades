@@ -118,8 +118,10 @@ public class SchoolGradesController {
     	SchoolGradesController.quizGrades.add(newGrade.getValue());   
     	this.lstQuizGrades.setCellFactory(TextFieldListCell.forListView(converter)); 	
     	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades); 
+    	this.gradesQz.add(newGrade);
     	
     	// Update the grade
+    	
     	this.lstQuizGrades.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Double>() {
          
     		public void changed(ObservableValue<? extends Double> observable, Double oldValue, Double newValue) {
@@ -133,8 +135,10 @@ public class SchoolGradesController {
     	
     	
     	// Calc Sum and show in textfield
+    
     	double calcScore = (this.strategySum.calculate(this.gradesQz));
     	this.qzScore.setValue(calcScore);    	
+    	
     	this.txtSubTotQuiz.textProperty().bindBidirectional(this.qzScore, new NumberStringConverter());  
     	
 		this.lstQuizGrades.accessibleTextProperty();
