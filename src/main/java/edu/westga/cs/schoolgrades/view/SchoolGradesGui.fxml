@@ -41,7 +41,7 @@
                   <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </VBox.margin>
             </Label>
-            <ListView fx:id="lstQuizGrades" prefHeight="126.0" prefWidth="120.0">
+            <ListView fx:id="lstQuizGrades" editable="true" prefHeight="126.0" prefWidth="120.0">
                <padding>
                   <Insets bottom="1.0" left="1.0" right="10.0" top="10.0" />
                </padding>
@@ -58,7 +58,7 @@
       <VBox prefHeight="207.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Exams" />
-            <ListView fx:id="lstExamGrades" prefHeight="198.0" prefWidth="120.0" />
+            <ListView fx:id="lstExamGrades" editable="true" prefHeight="198.0" prefWidth="120.0" />
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Exam Average" />
             <TextField />
          </children>
@@ -71,7 +71,7 @@
       <VBox prefHeight="171.0" prefWidth="157.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Homeworks" />
-            <ListView fx:id="lstHWGrades" prefHeight="133.0" prefWidth="120.0" />
+            <ListView fx:id="lstHWGrades" editable="true" prefHeight="133.0" prefWidth="120.0" />
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Homework Average" />
             <TextField />
          </children>

@@ -12,6 +12,7 @@ import edu.westga.cs.schoolgrades.model.SimpleGrade;
 import edu.westga.cs.schoolgrades.model.SumOfGradesStrategy;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.converter.StringConverter;
@@ -34,13 +35,11 @@ public class SchoolGradesController {
 	@FXML private TextField txtSubTotHW;
 	@FXML private TextField txtSubTotExam;
 	@FXML private TextField txtFinalGrade;
+	
     @FXML private ListView <Double> lstQuizGrades;
     @FXML private ListView <Double> lstHWGrades;
     @FXML private ListView <Double> lstExamGrades;
-  
-    
-    private IntegerProperty grade = new SimpleIntegerProperty(0);
-    
+   
     DoubleStringConverter converter;
 
     public static final ObservableList<Double> quizGrades = FXCollections.observableArrayList();    
@@ -64,9 +63,11 @@ public class SchoolGradesController {
     	this.lstHWGrades = new ListView<Double>(SchoolGradesController.hwGrades);
     	
     	converter = new DoubleStringConverter();
+    	
     	strategyAvg = new AverageOfGradesStrategy();
     	strategySum = new SumOfGradesStrategy();
     	strategyDropAvg = new DropLowestStrategy(strategyAvg);  
+    	
     	this.lstQuizGrades.setEditable(true); 
     	this.lstExamGrades.setEditable(true); 
     	this.lstHWGrades.setEditable(true); 
@@ -93,8 +94,22 @@ public class SchoolGradesController {
     	// set up initial value of 0.0
     	SimpleGrade newGrade = new SimpleGrade(0.00);
     	SchoolGradesController.quizGrades.add(newGrade.getValue());   
-    	this.lstQuizGrades.setCellFactory(TextFieldListCell.forListView(converter));
+    	this.lstQuizGrades.setCellFactory(TextFieldListCell.forListView(converter)); 	
     	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades); 
+    	
+    	// Update the grade
+    	this.lstQuizGrades.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Double>() {
+         
+    		public void changed(ObservableValue<? extends Double> observable, Double oldValue, Double newValue) {
+            
+        	  int index = this.lstQuizGrades.getSelectionModel().selectedItemIndex();
+        	  
+        	  SchoolGradesController.quizGrades(index).set(newValue);        	  
+        	  
+          }
+        });
+    	
+    	
 		this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());	
 		
