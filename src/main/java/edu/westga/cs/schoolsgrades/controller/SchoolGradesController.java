@@ -3,17 +3,13 @@ package edu.westga.cs.schoolsgrades.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.event.ChangeListener;
 
-import edu.westga.cs.babble.controllers.BabbleController;
-import edu.westga.cs.babble.model.Tile;
 import edu.westga.cs.schoolgrades.model.AverageOfGradesStrategy;
 import edu.westga.cs.schoolgrades.model.DropLowestStrategy;
 import edu.westga.cs.schoolgrades.model.Grade;
 import edu.westga.cs.schoolgrades.model.GradeCalculationStrategy;
 import edu.westga.cs.schoolgrades.model.SimpleGrade;
 import edu.westga.cs.schoolgrades.model.SumOfGradesStrategy;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ObservableValue;
@@ -25,9 +21,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.cell.ChoiceBoxListCell;
-import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.Callback;
 import javafx.util.converter.DoubleStringConverter;
@@ -132,7 +125,7 @@ public class SchoolGradesController {
     	double calcScore = (this.strategySum.calculate(this.gradesQz));
     	this.qzScore.setValue(calcScore);    	
     	
-    	this.txtSubTotQuiz.textProperty().bindBidirectional(this.qzScore, new NumberStringConverter());  
+   // 	this.txtSubTotQuiz.textProperty().bindBidirectional(this.qzScore, new NumberStringConverter());  
     	
 		this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
