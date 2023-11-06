@@ -110,7 +110,6 @@ public class SchoolGradesController {
     	this.quizGrades.add(newGrade);
     	this.lstQuizGrades.setItems(this.quizGrades); 	
     	
-    	
     	// Calculate Sum and show in textfield    
     	double calcScore = (this.strategySum.calculate(this.quizGrades));
     	
@@ -151,14 +150,15 @@ public class SchoolGradesController {
     public class GradeCellFactory implements Callback<ListView<Grade>, ListCell<Grade>> {
         @Override
         public ListCell<Grade> call(ListView<Grade> param) {
-            return new ListCell<>(){
-                @Override
+            return new TextFieldListCell<>(){
+            	@Override
                 public void updateItem(Grade grade, boolean empty) {
                     super.updateItem(grade, empty);
                     if (empty || grade == null) {
                         setText(null);
                     } else {
                         setText("" + grade.getValue());
+                        
                     }
                 }
 
