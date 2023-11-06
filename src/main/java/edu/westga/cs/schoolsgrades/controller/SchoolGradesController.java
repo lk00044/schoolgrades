@@ -92,9 +92,7 @@ public class SchoolGradesController {
      * @postcondition: Score is displayed in textfield for the final grade.
      */
     @FXML protected void handleRecalculateButtonAction(ActionEvent event) {
-    	double calcScore = (this.strategyAvg.calculate(this.gradesQz));
-    	this.score.setValue(calcScore);    	
-    	this.txtFinalGrade.textProperty().bindBidirectional(this.score, new NumberStringConverter());   	
+    	 	
     	
     }   
     
@@ -125,6 +123,12 @@ public class SchoolGradesController {
         	  
           }
         });
+    	
+    	
+    	// Calc Sum and show in textfield
+    	double calcScore = (this.strategySum.calculate(this.gradesQz));
+    	this.score.setValue(calcScore);    	
+    	this.txtSubTotQuiz.textProperty().bindBidirectional(this.score, new NumberStringConverter());  
     	
 		this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
