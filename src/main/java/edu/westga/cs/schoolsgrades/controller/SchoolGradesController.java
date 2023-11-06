@@ -56,7 +56,9 @@ public class SchoolGradesController {
     private AverageOfGradesStrategy strategyAvg;
     private SumOfGradesStrategy strategySum;
     
-    private List<Grade> grades;
+    private List<Grade> gradesQz;
+    private List<Grade> gradesHW;
+    private List<Grade> gradesEx;
     
     
     /**
@@ -90,8 +92,7 @@ public class SchoolGradesController {
      * @postcondition: Score is displayed in textfield for the final grade.
      */
     @FXML protected void handleRecalculateButtonAction(ActionEvent event) {
-    	
-    	double calcScore = (this.strategyAvg.calculate(this.grades));
+    	double calcScore = (this.strategyAvg.calculate(this.gradesQz));
     	this.score.setValue(calcScore);    	
     	this.txtFinalGrade.textProperty().bindBidirectional(this.score, new NumberStringConverter());   	
     	
@@ -120,16 +121,13 @@ public class SchoolGradesController {
         	  
         	  SchoolGradesController.quizGrades(index).set(newValue);     
         	  
-        	  this.grades.add(newValue);
+        	  this.gradesQz.add(newValue);
         	  
           }
         });
     	
-    	
 		this.lstQuizGrades.accessibleTextProperty();
-		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());	
-		
-		// Add listener for textfield selection to change the grade		
+		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
 		
     }   
     
