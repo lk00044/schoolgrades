@@ -40,9 +40,9 @@ public class SchoolGradesController {
 	@FXML private TextField txtSubTotExam;
 	@FXML private TextField txtFinalGrade;
 	
-    @FXML private ListView <Double> lstQuizGrades;
-    @FXML private ListView <Double> lstHWGrades;
-    @FXML private ListView <Double> lstExamGrades;
+    @FXML private ListView <Grade> lstQuizGrades;
+    @FXML private ListView <Grade> lstHWGrades;
+    @FXML private ListView <Grade> lstExamGrades;
    
     DoubleStringConverter converter;
     
@@ -50,9 +50,9 @@ public class SchoolGradesController {
     private SimpleDoubleProperty hwScore = new SimpleDoubleProperty(0.0);
     private SimpleDoubleProperty exScore = new SimpleDoubleProperty(0.0);
 
-    public static final ObservableList<Double> quizGrades = FXCollections.observableArrayList();    
-    public static final ObservableList<Double> hwGrades = FXCollections.observableArrayList();    
-    public static final ObservableList<Double> examGrades =  FXCollections.observableArrayList();
+    public  final ObservableList<Grade> quizGrades = FXCollections.observableArrayList();    
+    public  final ObservableList<Grade> hwGrades = FXCollections.observableArrayList();    
+    public  final ObservableList<Grade> examGrades =  FXCollections.observableArrayList();
     
     private DropLowestStrategy strategyDropAvg;
     private AverageOfGradesStrategy strategyAvg;
@@ -63,6 +63,9 @@ public class SchoolGradesController {
     private List<Grade> gradesEx;
     
     
+    // create a custom list cell
+    
+    
     /**
      * initialize the listviews, strategies, and converter
      * @precondition: none
@@ -70,10 +73,9 @@ public class SchoolGradesController {
      */
     @FXML	
     private void initialize() {
-    	this.lstQuizGrades = new ListView<Double>(SchoolGradesController.quizGrades);
-    	this.lstExamGrades = new ListView<Double>(SchoolGradesController.examGrades);
-    	this.lstHWGrades = new ListView<Double>(SchoolGradesController.hwGrades);
-    	
+    	this.lstQuizGrades.setItems(this.quizGrades);
+    	this.lstQuizGrades.setCellFactory(new GradeCellFactory());
+ 
     	this.gradesQz = new ArrayList<Grade>();
     	this.gradesHW = new ArrayList<Grade>();
     	this.gradesEx = new ArrayList<Grade>();
@@ -88,6 +90,9 @@ public class SchoolGradesController {
     	this.lstExamGrades.setEditable(true); 
     	this.lstHWGrades.setEditable(true); 
     }
+    
+    
+
     
     
     /**
@@ -115,29 +120,18 @@ public class SchoolGradesController {
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
     	// set up initial value of 0.0
     	SimpleGrade newGrade = new SimpleGrade(0.00);
-    	SchoolGradesController.quizGrades.add(newGrade.getValue());   
-    	this.lstQuizGrades.setCellFactory(TextFieldListCell.forListView(converter)); 	
-    	this.lstQuizGrades.setItems(SchoolGradesController.quizGrades); 
+    	this.quizGrades.add(newGrade);
     	this.gradesQz.add(newGrade);
+    	this.lstQuizGrades.setItems(this.quizGrades);
     	
-    	// Update the grade    	
-    	this.lstQuizGrades.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Double>() {
-         
-    		public void changed(ObservableValue<? extends Double> observable, Double oldValue, Double newValue) {
-            
-        	  int index = this.lstQuizGrades.getSelectionModel().selectedItemIndex();        	  
-        	  SchoolGradesController.quizGrades(index).set(newValue);             	  
-        	  this.gradesQz.add(newValue);
-        	  
-          }
-        });
+    	
     	
     	
     	// Calc Sum and show in textfield    
     	double calcScore = (this.strategySum.calculate(this.gradesQz));
     	this.qzScore.setValue(calcScore);    	
     	
-    	this.txtSubTotQuiz.textProperty().bindBidirectional(this.qzScore, new NumberStringConverter());  
+  //  	this.txtSubTotQuiz.textProperty().bindBidirectional(this.qzScore, new NumberStringConverter());  
     	
 		this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
@@ -163,6 +157,28 @@ public class SchoolGradesController {
     @FXML protected void handleMenuItemAddExamAction(ActionEvent event) {
         
     }   
+    
+    
+    /*
+     * Class to handle the grade in the list cell
+     * Sets the text to the value of the grade
+     */
+    public class GradeCellFactory implements Callback<ListView<Grade>, ListCell<Grade>> {
+        @Override
+        public ListCell<Grade> call(ListView<Grade> param) {
+            return new ListCell<>(){
+                @Override
+                public void updateItem(Grade grade, boolean empty) {
+                    super.updateItem(grade, empty);
+                    if (empty || grade == null) {
+                        setText(null);
+                    } else {
+                        setText("" + grade.getValue());
+                    }
+                }
+            };
+        }
+    }
    
     
 }
