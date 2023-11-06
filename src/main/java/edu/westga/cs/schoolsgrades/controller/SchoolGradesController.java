@@ -46,7 +46,7 @@ public class SchoolGradesController {
    
     DoubleStringConverter converter;
     
-    private double score;
+    private SimpleDoubleProperty score = new SimpleDoubleProperty(0.0)
 
     public static final ObservableList<Double> quizGrades = FXCollections.observableArrayList();    
     public static final ObservableList<Double> hwGrades = FXCollections.observableArrayList();    
@@ -87,14 +87,13 @@ public class SchoolGradesController {
     /**
      * Method to recalculate grades
      * @precondition: none
-     * @postcondition: 
+     * @postcondition: Score is displayed in textfield for the final grade.
      */
     @FXML protected void handleRecalculateButtonAction(ActionEvent event) {
     	
-    	this.score = (this.strategyAvg.calculate(this.grades));
-    	
-    	this.txtFinalGrade.textProperty().bindBidirectional(this.score, new NumberStringConverter());
-    	
+    	double calcScore = (this.strategyAvg.calculate(this.grades));
+    	this.score.setValue(calcScore);    	
+    	this.txtFinalGrade.textProperty().bindBidirectional(this.score, new NumberStringConverter());   	
     	
     }   
     
