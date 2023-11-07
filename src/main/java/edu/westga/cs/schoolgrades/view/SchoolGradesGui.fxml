@@ -20,12 +20,12 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Label>
-            <TextField id="txtFinalGrade" prefHeight="25.0" prefWidth="118.0">
+            <TextField id="txtFinalGrade" fx:id="txtFinalGrade" prefHeight="25.0" prefWidth="118.0">
                <padding>
                   <Insets left="20.0" />
                </padding>
             </TextField>
-            <Button id="btnRecalculate" mnemonicParsing="false" onAction="#handleRecalculateButtonAction" prefHeight="25.0" prefWidth="120.0" text="Recalculate">
+            <Button id="btnRecalculate" fx:id="btnRecalculate" mnemonicParsing="false" onAction="#handleRecalculateButtonAction" prefHeight="25.0" prefWidth="120.0" text="Recalculate">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>
@@ -47,7 +47,7 @@
                </padding>
             </ListView>
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Quiz SubTotal" />
-            <TextField id="txtSubTotQuiz" />
+            <TextField id="txtSubTotQuiz" fx:id="txtSubTotQuiz" />
          </children>
          <padding>
             <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />
@@ -60,7 +60,7 @@
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Exams" />
             <ListView id="lstExamGrades" fx:id="lstExamGrades" editable="true" prefHeight="198.0" prefWidth="120.0" />
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Exam Average" />
-            <TextField id="txtSubTotExam" />
+            <TextField id="txtSubTotExam" fx:id="txtSubTotExam" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
@@ -73,7 +73,7 @@
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Homeworks" />
             <ListView id="lstHWGrades" fx:id="lstHWGrades" editable="true" prefHeight="133.0" prefWidth="120.0" />
             <Label alignment="CENTER" prefHeight="17.0" prefWidth="135.0" text="Homework Average" />
-            <TextField id="txtSubTotHW" />
+            <TextField id="txtSubTotHW" fx:id="txtSubTotHW" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
