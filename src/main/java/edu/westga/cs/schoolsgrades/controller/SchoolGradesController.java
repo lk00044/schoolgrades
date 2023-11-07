@@ -93,7 +93,7 @@ public class SchoolGradesController {
     	 	double exam = this.exScore.getValue();
     	 	
     	 	SimpleDoubleProperty grade = new SimpleDoubleProperty(0.0);    	 	
-    	 	grade.setValue(.2 * quiz + .2 * hw + .4 * exam);    	 	
+    	 	grade.setValue(.2 * quiz + .3 * hw + .5 * exam);    	 	
     	 	this.txtFinalGrade.textProperty().bindBidirectional(grade, new NumberStringConverter()); 
     }   
     
@@ -110,8 +110,11 @@ public class SchoolGradesController {
     	this.quizGrades.add(newGrade);
     	this.lstQuizGrades.setItems(this.quizGrades); 	
     	
-    	// Calculate Sum and show in textfield    
-    	double calcScore = (this.strategySum.calculate(this.quizGrades));
+    	// Calculate Sum and show in textfield  
+    	SimpleDoubleProperty gradeQuiz = new SimpleDoubleProperty(0.0); 
+    	this.txtSubTotQuiz.textProperty().bindBidirectional(gradeQuiz, new NumberStringConverter()); 
+    	double grade = (this.strategySum.calculate(this.quizGrades));
+    	gradeQuiz.setValue(grade);   	
 
     	this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
@@ -126,7 +129,19 @@ public class SchoolGradesController {
      * @postcondition: Homework grade is added and the average is updated.
      */
     @FXML protected void handleMenuItemAddHomeworkAction(ActionEvent event) {
-        
+    	// set up initial value of 0.0
+    	SimpleGrade newGrade = new SimpleGrade(0.00);
+    	this.hwGrades.add(newGrade);
+    	this.lstHWGrades.setItems(this.hwGrades); 	
+
+    	// Calculate Sum and show in textfield  
+    	SimpleDoubleProperty gradeHW = new SimpleDoubleProperty(0.0); 
+    	this.txtSubTotHW.textProperty().bindBidirectional(gradeHW, new NumberStringConverter()); 
+    	double grade = (this.strategyDropAvg.calculate(this.hwGrades));
+    	gradeHW.setValue(grade);  
+
+    	this.lstQuizGrades.accessibleTextProperty();
+		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());	
     }   
     
     /**
@@ -135,7 +150,19 @@ public class SchoolGradesController {
      * @postcondition: Exam grade is added and the average is updated.
      */
     @FXML protected void handleMenuItemAddExamAction(ActionEvent event) {
-        
+    	// set up initial value of 0.0
+    	SimpleGrade newGrade = new SimpleGrade(0.00);
+    	this.examGrades.add(newGrade);
+    	this.lstExamGrades.setItems(this.examGrades); 	
+    	
+    	// Calculate Sum and show in textfield    
+    	SimpleDoubleProperty gradeExam = new SimpleDoubleProperty(0.0); 
+    	this.txtSubTotExam.textProperty().bindBidirectional(gradeExam, new NumberStringConverter()); 
+    	double grade =  (this.strategyAvg.calculate(this.examGrades));
+    	gradeExam.setValue(grade); 
+
+    	this.lstQuizGrades.accessibleTextProperty();
+		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());	
     }   
     
     
