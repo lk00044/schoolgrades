@@ -112,10 +112,6 @@ public class SchoolGradesController {
     	
     	// Calculate Sum and show in textfield    
     	double calcScore = (this.strategySum.calculate(this.quizGrades));
-    	
-    	
- //		ERROR "this.txtSubTotQuiz" is null   	
- //   	this.txtSubTotQuiz.setText("" + calcScore);
 
     	this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
@@ -157,11 +153,9 @@ public class SchoolGradesController {
                     if (empty || grade == null) {
                         setText(null);
                     } else {
-                        setText("" + grade.getValue());
-                        
+                        setText("" + grade.getValue());                         
                     }
                 }
-
             };
         }
     }
