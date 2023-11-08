@@ -1,21 +1,13 @@
 package edu.westga.cs.schoolsgrades.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import edu.westga.cs.schoolgrades.model.AverageOfGradesStrategy;
 import edu.westga.cs.schoolgrades.model.DropLowestStrategy;
 import edu.westga.cs.schoolgrades.model.Grade;
-import edu.westga.cs.schoolgrades.model.GradeCalculationStrategy;
 import edu.westga.cs.schoolgrades.model.SimpleGrade;
 import edu.westga.cs.schoolgrades.model.SumOfGradesStrategy;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.css.converter.StringConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -25,10 +17,7 @@ import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.Callback;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.NumberStringConverter;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.*;
-import javax.faces.application.*;
+
 
 public class SchoolGradesController {
 
@@ -176,8 +165,7 @@ public class SchoolGradesController {
      */
     public class GradeCellFactory implements Callback<ListView<Grade>, ListCell<Grade>> {
         @Override
-        public ListCell<Grade> call(ListView<Grade> param) {
-        	GradeConverter converter = new GradeConverter();
+        public ListCell<Grade> call(ListView<Grade> param) {        	
             return new TextFieldListCell<>(){
             	@Override
                 public void updateItem(Grade grade, boolean empty) {
@@ -192,25 +180,28 @@ public class SchoolGradesController {
         }
     }
     
-    @FacesConverter(value = "GradeConverter")
-    public class GradeConverter implements Converter {   	
+    
+    /*   EFFORT TRYING TO DO THE CONVERTER
+
+    public class GradeConverter implements StringConverter<Grade> {   	    	
+    	 TextFieldListCell<Grade> cell = new TextFieldListCell<Grade>();
     	
+    	 public String toString(Grade grade) {
+             return "" + grade.getValue();
+         }
 
-		@Override
-		public Object getAsObject(FacesContext arg0, UIComponent arg1, String newValue) {
-			Grade newGrade = new SimpleGrade(Double.parseDouble(newValue));
-			return newGrade;
-		}
-
-		@Override
-		public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
-			Grade grade = (SimpleGrade)value;
-			double gradeValue = grade.getValue();
-			String strGrade = "" + gradeValue;
-			return strGrade;
-		}
+         public Grade fromString(String string) {
+        	 SimpleGrade grade = (SimpleGrade) cell.getItem();
+             if (grade == null) {
+            	 Grade newGrade = new SimpleGrade(Double.parseDouble(string));
+                 return newGrade;
+             } else {
+            	 grade.setValue(Double.parseDouble(string));
+                 return grade ;
+             }
+         }
     	
     }
-   
+   */
     
 }
