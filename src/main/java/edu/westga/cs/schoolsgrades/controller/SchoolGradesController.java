@@ -17,6 +17,7 @@ import javafx.scene.control.cell.TextFieldListCell;
 import javafx.util.Callback;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.NumberStringConverter;
+import javafx.util.StringConverter;
 
 
 public class SchoolGradesController {
@@ -54,13 +55,101 @@ public class SchoolGradesController {
     @FXML	
     private void initialize() {
     	this.lstQuizGrades.setItems(this.quizGrades);
-    	this.lstQuizGrades.setCellFactory(new GradeCellFactory());
+   // 	this.lstQuizGrades.setCellFactory(new GradeCellFactory());
+    	
+    	this.lstQuizGrades.setCellFactory(lv -> {
+    	    TextFieldListCell<Grade> cell = new TextFieldListCell<Grade>();
+    	    StringConverter<Grade> converter = new StringConverter<Grade>() {
+
+    	        @Override
+    	        public String toString(Grade grade) {
+    	            return "" + grade.getValue();
+    	        }
+
+    	        @Override
+    	        public Grade fromString(String string) {
+    	        	 SimpleGrade grade = (SimpleGrade) cell.getItem();
+    	             if (grade == null) {
+    	            	 Grade newGrade = new SimpleGrade(Double.parseDouble(string));
+    	                 return newGrade;
+    	             } else {
+    	            	 grade.setValue(Double.parseDouble(string));
+    	                 return grade ;
+    	             }
+    	         }
+
+    	    };
+
+    	    cell.setConverter(converter);
+
+    	    return cell ;
+    	});
+    	
+    	
     	
     	this.lstHWGrades.setItems(this.hwGrades);
-    	this.lstHWGrades.setCellFactory(new GradeCellFactory());
+    //	this.lstHWGrades.setCellFactory(new GradeCellFactory());
+    	
+    	this.lstHWGrades.setCellFactory(lv -> {
+    	    TextFieldListCell<Grade> cell = new TextFieldListCell<Grade>();
+    	    StringConverter<Grade> converter = new StringConverter<Grade>() {
+
+    	        @Override
+    	        public String toString(Grade grade) {
+    	            return "" + grade.getValue();
+    	        }
+
+    	        @Override
+    	        public Grade fromString(String string) {
+    	        	 SimpleGrade grade = (SimpleGrade) cell.getItem();
+    	             if (grade == null) {
+    	            	 Grade newGrade = new SimpleGrade(Double.parseDouble(string));
+    	                 return newGrade;
+    	             } else {
+    	            	 grade.setValue(Double.parseDouble(string));
+    	                 return grade ;
+    	             }
+    	         }
+
+    	    };
+
+    	    cell.setConverter(converter);
+
+    	    return cell ;
+    	});
+    	
     	
     	this.lstExamGrades.setItems(this.examGrades);
-    	this.lstExamGrades.setCellFactory(new GradeCellFactory());
+ //   	this.lstExamGrades.setCellFactory(new GradeCellFactory());
+    	
+    	this.lstExamGrades.setCellFactory(lv -> {
+    	    TextFieldListCell<Grade> cell = new TextFieldListCell<Grade>();
+    	    StringConverter<Grade> converter = new StringConverter<Grade>() {
+
+    	        @Override
+    	        public String toString(Grade grade) {
+    	            return "" + grade.getValue();
+    	        }
+
+    	        @Override
+    	        public Grade fromString(String string) {
+    	        	 SimpleGrade grade = (SimpleGrade) cell.getItem();
+    	             if (grade == null) {
+    	            	 Grade newGrade = new SimpleGrade(Double.parseDouble(string));
+    	                 return newGrade;
+    	             } else {
+    	            	 grade.setValue(Double.parseDouble(string));
+    	                 return grade ;
+    	             }
+    	         }
+
+    	    };
+
+    	    cell.setConverter(converter);
+
+    	    return cell ;
+    	});
+    	
     
     	converter = new DoubleStringConverter();
     	
@@ -100,14 +189,18 @@ public class SchoolGradesController {
     @FXML protected void handleMenuItemAddQuizAction(ActionEvent event) {
     	// set up initial value of 0.0
     	SimpleGrade newGrade = new SimpleGrade(0.00);
-    	this.quizGrades.add(newGrade);
-    	this.lstQuizGrades.setItems(this.quizGrades); 	
+    	
     	
     	// Calculate Sum and show in textfield  
     	SimpleDoubleProperty gradeQuiz = new SimpleDoubleProperty(0.0); 
-    	this.txtSubTotQuiz.textProperty().bindBidirectional(gradeQuiz, new NumberStringConverter()); 
+    	
+    	this.quizGrades.add(newGrade);
+    	this.lstQuizGrades.setItems(this.quizGrades); 	
+    	
     	double grade = (this.strategySum.calculate(this.quizGrades));
-    	gradeQuiz.setValue(grade);   	
+    	gradeQuiz.setValue(grade);   
+
+    	this.txtSubTotQuiz.textProperty().bindBidirectional(gradeQuiz, new NumberStringConverter()); 
 
     	this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
@@ -150,9 +243,10 @@ public class SchoolGradesController {
     	
     	// Calculate Sum and show in textfield    
     	SimpleDoubleProperty gradeExam = new SimpleDoubleProperty(0.0); 
-    	this.txtSubTotExam.textProperty().bindBidirectional(gradeExam, new NumberStringConverter()); 
     	double grade =  (this.strategyAvg.calculate(this.examGrades));
-    	gradeExam.setValue(grade); 
+    	gradeExam.setValue(grade);     	
+
+    	this.txtSubTotExam.textProperty().bindBidirectional(gradeExam, new NumberStringConverter()); 
 
     	this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());	
@@ -181,9 +275,9 @@ public class SchoolGradesController {
     }
     
     
-    /*   EFFORT TRYING TO DO THE CONVERTER
+    /*   EFFORT TRYING TO DO THE CONVERTER  */
 
-    public class GradeConverter implements StringConverter<Grade> {   	    	
+    public class GradeConverter extends StringConverter<Grade> {   	    	
     	 TextFieldListCell<Grade> cell = new TextFieldListCell<Grade>();
     	
     	 public String toString(Grade grade) {
@@ -202,6 +296,6 @@ public class SchoolGradesController {
          }
     	
     }
-   */
+   
     
 }
