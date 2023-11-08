@@ -59,6 +59,10 @@ public class SchoolGradesController {
     @FXML	
     private void initialize() {
     	this.lstQuizGrades.setItems(this.quizGrades);
+    	this.gradeQuiz = new SimpleDoubleProperty(0.0); 
+    	this.gradeHW = new SimpleDoubleProperty(0.0); 
+    	this.gradeExam = new SimpleDoubleProperty(0.0); 
+    	
    // 	this.lstQuizGrades.setCellFactory(new GradeCellFactory());
     	
     	this.lstQuizGrades.setCellFactory(lv -> {
@@ -177,19 +181,18 @@ public class SchoolGradesController {
     		double gradeQ = (this.strategySum.calculate(this.quizGrades));
     		gradeQuiz.setValue(gradeQ);  
     		
-    		double gradeH = (this.strategySum.calculate(this.quizGrades));
+    		double gradeH = (this.strategyDropAvg.calculate(this.hwGrades));
     		gradeHW.setValue(gradeH); 
     		
-    		double gradeEx = (this.strategySum.calculate(this.quizGrades));
+    		double gradeEx = (this.strategyAvg.calculate(this.examGrades));
     		gradeExam.setValue(gradeEx); 
     	
-    	 	double quiz = this.qzScore.getValue();
-    	 	double hw = this.hwScore.getValue() / this.quizGrades.size();
-    	 	double exam = this.exScore.getValue();
+    	 	double hw = gradeH / this.quizGrades.size();
     	 	
-    	 	SimpleDoubleProperty grade = new SimpleDoubleProperty(0.0);    	 	
-    	 	grade.setValue(.2 * quiz + .3 * hw + .5 * exam);    	 	
-    	 	this.txtFinalGrade.textProperty().bindBidirectional(grade, new NumberStringConverter()); 
+    	 	SimpleDoubleProperty finalGrade = new SimpleDoubleProperty(0.0);    	 	
+    	 	finalGrade.setValue(.2 * gradeQ + .3 * hw + .5 * gradeEx);    
+    	 	
+    	 	this.txtFinalGrade.textProperty().bindBidirectional(finalGrade, new NumberStringConverter()); 
     }   
     
     
@@ -205,15 +208,14 @@ public class SchoolGradesController {
     	
     	
     	// Calculate Sum and show in textfield  
-    	this.gradeQuiz= new SimpleDoubleProperty(0.0); 
     	
     	this.quizGrades.add(newGrade);
     	this.lstQuizGrades.setItems(this.quizGrades); 	
     	
     	double grade = (this.strategySum.calculate(this.quizGrades));
-    	gradeQuiz.setValue(grade);   
+    	this.gradeQuiz.setValue(grade);   
 
-    	this.txtSubTotQuiz.textProperty().bindBidirectional(gradeQuiz, new NumberStringConverter()); 
+    	this.txtSubTotQuiz.textProperty().bindBidirectional(this.gradeQuiz, new NumberStringConverter()); 
 
     	this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());		
@@ -233,11 +235,12 @@ public class SchoolGradesController {
     	this.hwGrades.add(newGrade);
     	this.lstHWGrades.setItems(this.hwGrades); 	
 
-    	// Calculate Sum and show in textfield  
-    	SimpleDoubleProperty gradeHW = new SimpleDoubleProperty(0.0); 
-    	this.txtSubTotHW.textProperty().bindBidirectional(gradeHW, new NumberStringConverter()); 
+    	// Calculate Sum and show in textfield    	
+    	
     	double grade = (this.strategyDropAvg.calculate(this.hwGrades));
-    	gradeHW.setValue(grade);  
+    	this.gradeHW.setValue(grade);  
+    	
+    	this.txtSubTotHW.textProperty().bindBidirectional(this.gradeHW, new NumberStringConverter()); 
 
     	this.lstQuizGrades.accessibleTextProperty();
 		this.lstQuizGrades.setAccessibleText("" + newGrade.getValue());	
@@ -255,8 +258,7 @@ public class SchoolGradesController {
     	this.lstExamGrades.setItems(this.examGrades); 	
     	
     	// Calculate Sum and show in textfield    
-    	SimpleDoubleProperty gradeExam = new SimpleDoubleProperty(0.0); 
-    	double grade =  (this.strategyAvg.calculate(this.examGrades));
+    	double grade =  this.strategyAvg.calculate(this.examGrades);
     	gradeExam.setValue(grade);     	
 
     	this.txtSubTotExam.textProperty().bindBidirectional(gradeExam, new NumberStringConverter()); 
