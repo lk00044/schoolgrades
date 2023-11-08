@@ -177,6 +177,7 @@ public class SchoolGradesController {
     public class GradeCellFactory implements Callback<ListView<Grade>, ListCell<Grade>> {
         @Override
         public ListCell<Grade> call(ListView<Grade> param) {
+        	GradeConverter converter = new GradeConverter();
             return new TextFieldListCell<>(){
             	@Override
                 public void updateItem(Grade grade, boolean empty) {
@@ -191,20 +192,22 @@ public class SchoolGradesController {
         }
     }
     
-    public class GradeConverter implements Converter {
-    	
+    @FacesConverter(value = "GradeConverter")
+    public class GradeConverter implements Converter {   	
     	
 
 		@Override
-		public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-			// TODO Auto-generated method stub
-			return null;
+		public Object getAsObject(FacesContext arg0, UIComponent arg1, String newValue) {
+			Grade newGrade = new SimpleGrade(Double.parseDouble(newValue));
+			return newGrade;
 		}
 
 		@Override
-		public String getAsString(FacesContext arg0, UIComponent arg1, Object arg2) {
-			// TODO Auto-generated method stub
-			return null;
+		public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
+			Grade grade = (SimpleGrade)value;
+			double gradeValue = grade.getValue();
+			String strGrade = "" + gradeValue;
+			return strGrade;
 		}
     	
     }
