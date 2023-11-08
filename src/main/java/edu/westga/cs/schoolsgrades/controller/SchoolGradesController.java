@@ -44,7 +44,11 @@ public class SchoolGradesController {
     private DropLowestStrategy strategyDropAvg;
     private AverageOfGradesStrategy strategyAvg;
     private SumOfGradesStrategy strategySum;
-  
+    
+    private SimpleDoubleProperty gradeQuiz;
+    private SimpleDoubleProperty gradeHW;
+    private SimpleDoubleProperty gradeExam;
+    
     
     
     /**
@@ -170,6 +174,15 @@ public class SchoolGradesController {
      * @postcondition: Score is displayed in textfield for the final grade.
      */
     @FXML protected void handleRecalculateButtonAction(ActionEvent event) {
+    		double gradeQ = (this.strategySum.calculate(this.quizGrades));
+    		gradeQuiz.setValue(gradeQ);  
+    		
+    		double gradeH = (this.strategySum.calculate(this.quizGrades));
+    		gradeHW.setValue(gradeH); 
+    		
+    		double gradeEx = (this.strategySum.calculate(this.quizGrades));
+    		gradeExam.setValue(gradeEx); 
+    	
     	 	double quiz = this.qzScore.getValue();
     	 	double hw = this.hwScore.getValue() / this.quizGrades.size();
     	 	double exam = this.exScore.getValue();
@@ -192,7 +205,7 @@ public class SchoolGradesController {
     	
     	
     	// Calculate Sum and show in textfield  
-    	SimpleDoubleProperty gradeQuiz = new SimpleDoubleProperty(0.0); 
+    	this.gradeQuiz= new SimpleDoubleProperty(0.0); 
     	
     	this.quizGrades.add(newGrade);
     	this.lstQuizGrades.setItems(this.quizGrades); 	
@@ -256,7 +269,7 @@ public class SchoolGradesController {
     /*
      * Class to handle the grade in the list cell
      * Sets the text to the value of the grade
-     */
+     
     public class GradeCellFactory implements Callback<ListView<Grade>, ListCell<Grade>> {
         @Override
         public ListCell<Grade> call(ListView<Grade> param) {        	
@@ -274,28 +287,7 @@ public class SchoolGradesController {
         }
     }
     
-    
-    /*   EFFORT TRYING TO DO THE CONVERTER  */
-
-    public class GradeConverter extends StringConverter<Grade> {   	    	
-    	 TextFieldListCell<Grade> cell = new TextFieldListCell<Grade>();
-    	
-    	 public String toString(Grade grade) {
-             return "" + grade.getValue();
-         }
-
-         public Grade fromString(String string) {
-        	 SimpleGrade grade = (SimpleGrade) cell.getItem();
-             if (grade == null) {
-            	 Grade newGrade = new SimpleGrade(Double.parseDouble(string));
-                 return newGrade;
-             } else {
-            	 grade.setValue(Double.parseDouble(string));
-                 return grade ;
-             }
-         }
-    	
-    }
+    */
    
     
 }
