@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 public class TestWeightedGradeGetValue {
 
-	// updated
 	private static final double DELTA = 0.001;
 	private WeightedGrade weightedGrade;
 	private Grade mockGrade;
