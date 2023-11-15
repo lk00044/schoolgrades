@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class TestWeightedGradeGetValue {
 
+	// updated
 	private static final double DELTA = 0.001;
 	private WeightedGrade weightedGrade;
 	private Grade mockGrade;
@@ -26,7 +27,7 @@ public class TestWeightedGradeGetValue {
 	@Test
 	public void shouldApplyWeightOfOne() {
 		weightedGrade = new WeightedGrade(mockGrade, 1);
-		assertEquals(100, weightedGrade.getValue(), DELTA);
+		assertEquals(100, weightedGrade.getValue(), DELTA); 
 	}
 	
 	@Test
