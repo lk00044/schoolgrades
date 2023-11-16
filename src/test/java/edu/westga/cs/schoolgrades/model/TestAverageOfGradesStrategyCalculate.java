@@ -11,10 +11,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-
-
 public class TestAverageOfGradesStrategyCalculate {
 
 	private static final double DELTA = 0.001;
