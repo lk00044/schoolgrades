@@ -9,12 +9,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 public class TestDropLowestStrategyCalculate {
 
@@ -76,8 +78,8 @@ public class TestDropLowestStrategyCalculate {
 		
 		double lowSum = childStrategy.calculate(lowGrades);
 		double gradesSum = dropLowestStrategy.calculate(grades);
-		double diff = lowSum - gradesSum;
-		 
+		double diff = lowSum - gradesSum;		 
+	
 		assertEquals(0, diff, DELTA);
 		assertEquals(50, dropLowestStrategy.calculate(grades), DELTA);
 		
