@@ -5,6 +5,7 @@ package edu.westga.cs.schoolgrades.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -76,11 +77,7 @@ public class TestDropLowestStrategyCalculate {
 		double lowSum = childStrategy.calculate(lowGrades);
 		double gradesSum = dropLowestStrategy.calculate(grades);
 		double diff = lowSum - gradesSum;
-		
-		//ArgumentCaptor<Grade> argumentCaptor = ArgumentCaptor.forClass(Grade.class);
-		//verify(grades).addAll(this.lowGrades);
-		
-		
+		 
 		assertEquals(0, diff, DELTA);
 		assertEquals(50, dropLowestStrategy.calculate(grades), DELTA);
 		
