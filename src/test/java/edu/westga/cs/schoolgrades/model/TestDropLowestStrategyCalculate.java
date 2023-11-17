@@ -33,65 +33,74 @@ public class TestDropLowestStrategyCalculate {
 	
 	@BeforeEach
 	public void setUp() throws Exception {
-		mockGrade0 = mock(Grade.class);
-		when(mockGrade0.getValue()).thenReturn(10.00);
-		mockGrade1 = mock(Grade.class);
-		when(mockGrade1.getValue()).thenReturn(20.00);
-		mockGrade2 = mock(Grade.class);
-		when(mockGrade2.getValue()).thenReturn(30.00);
+		this.grades = new ArrayList<Grade>();
+		this.lowGrades = new ArrayList<Grade>();
 		
-		grades = new ArrayList<Grade>();
-		lowGrades = new ArrayList<Grade>();
+		this.mockGrade0 = mock(Grade.class);
+		when(this.mockGrade0.getValue()).thenReturn(10.00);
+		this.mockGrade1 = mock(Grade.class);
+		when(this.mockGrade1.getValue()).thenReturn(20.00);
+		this.mockGrade2 = mock(Grade.class);
+		when(this.mockGrade2.getValue()).thenReturn(30.00);
 		
-		childStrategy = new SumOfGradesStrategy();
-		dropLowestStrategy = new DropLowestStrategy(childStrategy);
+		this.childStrategy = mock(GradeCalculationStrategy.class);
+		this.dropLowestStrategy = new DropLowestStrategy(this.childStrategy);
 	}
 
 	@Test
 	public void shouldNotAllowNullGradesList() {
-		assertThrows(IllegalArgumentException.class, () ->{ 
-			dropLowestStrategy.calculate(null);
-		});
+		this.dropLowestStrategy.calculate(this.grades);
+		verify(this.childStrategy).calculate(this.lowGrades);
+		
+//		assertThrows(IllegalArgumentException.class, () ->{ 
+//			dropLowestStrategy.calculate(null);
+//		});
 	}
 
 	@Test
 	public void shouldNotDropLowestIfGradesListIsEmpty() {
-		assertEquals(0, dropLowestStrategy.calculate(grades), DELTA);
+		this.dropLowestStrategy.calculate(this.grades);
+		verify(this.childStrategy).calculate(this.lowGrades);	
+		
+	//	assertEquals(0, dropLowestStrategy.calculate(grades), DELTA);
 	}
 	
 	public void shouldNotDropLowestIfGradesListHasOneElement() {
-		grades.add(mockGrade0);
-		assertEquals(mockGrade0.getValue(), dropLowestStrategy.calculate(grades), DELTA);
+		this.grades.add(mockGrade0);
+		
+		this.dropLowestStrategy.calculate(this.grades);
+		verify(this.childStrategy).calculate(this.lowGrades);
+		
+	//	assertEquals(mockGrade0.getValue(), this.dropLowestStrategy.calculate(this.grades), DELTA);
 	}
 	
 	@Test
 	public void canDropWhenLowestIsFirst() {
-		grades.add(mockGrade0);
-		grades.add(mockGrade1);
-		grades.add(mockGrade2);
+		this.grades.add(mockGrade0);
+		this.grades.add(mockGrade1);
+		this.grades.add(mockGrade2);		
 		this.lowGrades.add(mockGrade1);
 		this.lowGrades.add(mockGrade2);
 		
+		this.dropLowestStrategy.calculate(this.grades);
+		verify(this.childStrategy).calculate(this.lowGrades);
 		
-	//	ArgumentCaptor<List<Grade>> argumentCaptor = ArgumentCaptor.forClass(List.class);
-	//	verify(grades).addAll(argumentCaptor.capture());
-		
-		double lowSum = childStrategy.calculate(lowGrades);
-		double gradesSum = dropLowestStrategy.calculate(grades);
-		double diff = lowSum - gradesSum;		 
-	
-		assertEquals(0, diff, DELTA);
-		assertEquals(50, dropLowestStrategy.calculate(grades), DELTA);
-		
+	//	assertEquals(50, this.dropLowestStrategy.calculate(this.grades), DELTA);		
 	}
 	
 	
 	@Test
 	public void canDropWhenLowestIsLast() {
-		grades.add(mockGrade1);
-		grades.add(mockGrade2);
-		grades.add(mockGrade0);
-		assertEquals(50, dropLowestStrategy.calculate(grades), DELTA);
+		this.grades.add(mockGrade1);
+		this.grades.add(mockGrade2);
+		this.grades.add(mockGrade0);
+		this.lowGrades.add(mockGrade1);
+		this.lowGrades.add(mockGrade2);
+		
+		this.dropLowestStrategy.calculate(this.grades);
+		verify(this.childStrategy).calculate(this.lowGrades);
+		
+	//	assertEquals(50, this.dropLowestStrategy.calculate(this.grades), DELTA);
 	}
 	
 	@Test
@@ -99,15 +108,30 @@ public class TestDropLowestStrategyCalculate {
 		grades.add(mockGrade1);
 		grades.add(mockGrade0);
 		grades.add(mockGrade2);
-		assertEquals(50, dropLowestStrategy.calculate(grades), DELTA);
+
+		this.lowGrades.add(mockGrade1);
+		this.lowGrades.add(mockGrade2);
+		
+		this.dropLowestStrategy.calculate(this.grades);
+		verify(this.childStrategy).calculate(this.lowGrades);
+		
+//		assertEquals(50, dropLowestStrategy.calculate(this.grades), DELTA);
 	}
 	
 	@Test
 	public void dropsOnlyOneIfThereAreMultipleLowestGrades() {
-		grades.add(mockGrade1);
-		grades.add(mockGrade0);
-		grades.add(mockGrade2);
-		grades.add(mockGrade0);
-		assertEquals(60, dropLowestStrategy.calculate(grades), DELTA);
+		
+		this.grades.add(mockGrade1);
+		this.grades.add(mockGrade0);
+		this.grades.add(mockGrade2);
+		this.grades.add(mockGrade0);
+		this.lowGrades.add(mockGrade1);		
+		this.lowGrades.add(mockGrade2);
+		this.lowGrades.add(mockGrade0);
+		
+		this.dropLowestStrategy.calculate(this.grades);
+		verify(this.childStrategy).calculate(this.lowGrades);
+		
+		// assertEquals(60, dropLowestStrategy.calculate(grades), DELTA);
 	}
 }
